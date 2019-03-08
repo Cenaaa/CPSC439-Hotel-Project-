@@ -1,0 +1,57 @@
+Customer
+First name
+Last name
+password
+Key Id
+Phone Number
+Gender
+Age
+Address
+Email
+
+Payment INFO
+Customer ID
+First Name
+Last Name
+Streeet Address
+State
+Apartment #
+Zip Code
+Credit Card #
+CW2
+Expiration Date
+
+Reservation
+Customer ID
+Reservation ID
+Start date
+End Date
+Room #
+
+Order
+Customer ID
+Order ID
+Order Time
+[Type of Food]
+Order Status 0 - ordered, 1 - cooking, 2 - delivered
+
+
+Front Desk
+First Name
+Last Name
+Desk ID
+Password
+Email
+Phone Number
+
+Kitchen
+[Avialable Food]
+
+
+Cleaners
+First Name
+Last Name
+Employee ID
+On Duty 0 - not availabel, 1 - available, 2 - cleaning
+
+
