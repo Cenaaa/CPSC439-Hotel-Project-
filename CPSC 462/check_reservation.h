@@ -58,12 +58,11 @@ room check_reservation::check_res(int start, int end, int people)
 	{
 		if (choice == non_reserved_rooms[j].get_id())
 		{
-			std::cout << "Dope." << std::endl;
 			return rooms[j];
 		}
 
 	}
-	std:: cout << "damn you failed lol" << std::endl;
+	std:: cout << "Didnt choose valid room." << std::endl;
 	room n(0,0,0);
 	return n;
 	
