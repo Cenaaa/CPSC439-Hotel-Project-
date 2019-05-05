@@ -75,6 +75,23 @@ class room
 			return price;
 		}
 
+		void set_start(int s)
+		{
+			start_date = s;
+		}
+
+		void set_end(int e)
+		{
+			end_date = e;
+		}
+
+		void set_name(std::string name)
+		{
+			guest_name = name;
+		}
+
+		
+
 	private:
 		int room_id, start_date, end_date, people, price;
 		std::string guest_name;
