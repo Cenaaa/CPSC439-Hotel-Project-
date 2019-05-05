@@ -6,7 +6,7 @@ class payment
 {
 public:
 	payment(int price_);
-	payment_info make_payment();
+	payment_info make_payment(int room_num);
 private:
 	int price;
 };
@@ -15,7 +15,7 @@ payment::payment(int price_)
 	price = price_;
 }
 
-payment_info payment::make_payment()
+payment_info payment::make_payment(int room_num)
 {
 	std::string name;
 	int cw2, date,cc;
@@ -42,13 +42,13 @@ payment_info payment::make_payment()
 	if (choice == "y" or choice == "Y")
 	{
 		std::cout << "payment successful." << std::endl;
-		payment_info f(name,123456+date,cc,date,cw2);
+		payment_info f(name,123456+date,cc,date,cw2,room_num);
 		return f;
 	}
 	else 
 	{	
 		std::cout << "no payment." << std::endl;
-		payment_info n("",0,0,0,0);
+		payment_info n("",0,0,0,0,0);
 		return n;
 	}
 
