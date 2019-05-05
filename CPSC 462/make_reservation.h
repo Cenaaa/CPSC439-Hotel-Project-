@@ -11,27 +11,47 @@
 class make_reservation
 {
 public:
-	make_reservation(int start, int end, int people);
+	make_reservation();
+	void make_res();
 	//~make_reservation();
 
 private:
-	int start_, end_, people_;
 	bool picked_room, made_pay;
 };
 
-make_reservation :: make_reservation(int start, int end, int people)
+make_reservation :: make_reservation()
+{
+}
+
+void make_reservation :: make_res()
 {
 	bool v_res = false;
 	bool v_pay = false;
+	int sdate, edate, ppl;
 
-	check_reservation res(start, end, people);
-	room z = res.check_res(start,end,people);
+	std::cout << "You've selected make a reservation." << std::endl << "Enter a start date: ";
+	std::cin >> sdate;
+	std::cout << "Enter an end date: ";
+	std::cin >> edate;
+	std::cout << "Enter number of people: ";
+	std::cin >> ppl;
+
+	check_reservation res(sdate, edate, ppl);
+	room z = res.check_res(sdate,edate,ppl);
+
 	while (v_res == false)
 	{		
 		if (z.get_id() == 0)
 		{
 			std::cout << "Room reservation failed." << std::endl;
-			z = res.check_res(start,end,people);
+			std::cout << "Enter a start date: ";
+			std::cin >> sdate;
+			std::cout << "Enter an end date: ";
+			std::cin >> edate;
+			std::cout << "Enter number of people: ";
+			std::cin >> ppl;
+
+			z = res.check_res(sdate,edate,ppl);
 		}
 		else
 		{
@@ -51,10 +71,13 @@ make_reservation :: make_reservation(int start, int end, int people)
 		}
 		else
 		{
-			res.change_reservation(z.get_id(),z.get_name(),start,end,people);
+			res.change_reservation(z.get_id(),z.get_name(),sdate,edate,ppl);
 			v_pay = true;
 		}
 	}	
+
 }
+
+	
 
 #endif 
