@@ -1,20 +1,24 @@
 #ifndef pment
 #define pment
+#include "payment_info.h"
 
 class payment
 {
 public:
-	payment();
-	bool make_payment();
+	payment(int price_);
+	payment_info make_payment();
+private:
+	int price;
 };
-payment::payment()
+payment::payment(int price_)
 {
+	price = price_;
 }
 
-bool payment::make_payment()
+payment_info payment::make_payment()
 {
-	std::string name, cc, bill;
-	int cw2, date;
+	std::string name;
+	int cw2, date,cc;
 
 	std::cout << "Enter your name: ";
 	std::getline(std::cin.ignore(),name);
@@ -29,11 +33,26 @@ bool payment::make_payment()
 	std::cout << "Is the following information correct?" << std::endl;
 	std::cout << "name: " << name << std::endl;
 	std::cout << "cc: " << cc << std::endl;
-	std::cout << cw2 << std::endl;
-	std::cout << date << std::endl;
+	std::cout << "cw2: " << cw2 << std::endl;
+	std::cout << "date: " << date << std::endl;
 
-	return true;
+	std::string choice;
+	std:: cin >> choice;
+
+	if (choice == "y" or choice == "Y")
+	{
+		std::cout << "bing bing wahoo" << std::endl;
+		payment_info f(name,123456+date,cc,date,cw2);
+		return f;
+	}
+	else 
+	{	
+		std::cout << "damn no payment lol" << std::endl;
+		payment_info n("",0,0,0,0);
+		return n;
+	}
+
 
 }
 
-#endif pment
+#endif 
