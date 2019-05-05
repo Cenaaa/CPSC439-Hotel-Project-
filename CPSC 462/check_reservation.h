@@ -6,116 +6,68 @@
 #include <vector>
 #include <sstream>
 #include "payment.h"
+#include "room.h"
 
 
 class check_reservation
 {
 public: 
 	check_reservation(int start, int end, int people);
-	bool check_res(int start, int end, int people);
+	room check_res(int start, int end, int people);
 	//~check_reservation();
 
 private:
-	std::vector<std::string> rooms;
+	std::vector<room> rooms;
+	std::vector<room> non_reserved_rooms;
 };
 
 check_reservation::check_reservation(int start, int end, int people)
 {	
-
+	room a(1, 3, 500);
+	rooms.push_back(a);
+	room b("Bob Ross", 2, 5122019, 5202019, 4, 1000);
+	rooms.push_back(b);
+	room c("Bob Dylan", 3, 5152019, 5302019, 5, 2000);
+	rooms.push_back(c);
+	room d(4, 5, 3000);
+	rooms.push_back(d);
+	room e(5,3,250);
+	rooms.push_back(e);
+	
 }
 
-bool check_reservation::check_res(int start, int end, int people)
+room check_reservation::check_res(int start, int end, int people)
 {
-	std::ifstream c_file("room_list.txt");
-	std::string room_num;
-	bool avail;
+	for (int i = 0; i < 5; i++)
+	{
+		if (people <= rooms[i].get_people())
+			{			
+				if (start >= rooms[i].get_start() or rooms[i].get_start() == 0)
+				{			
+					std:: cout << "Room: " << rooms[i].get_id() << " is available." << std::endl;
+					std:: cout << "Price: $" << rooms[i].get_price() << std::endl;		
+					non_reserved_rooms.push_back(rooms[i]);
+				}
+			}		
+	}
+
+	int choice;
+	std::cout << "Choose a room." << std::endl;
+	std::cin >> choice;
+	for (int j = 0; j < rooms.size(); j++)
+	{
+		if (choice == non_reserved_rooms[j].get_id())
+		{
+			std::cout << "Dope." << std::endl;
+			return rooms[j];
+		}
+
+	}
+	std:: cout << "damn you failed lol" << std::endl;
+	room n(0,0,0);
+	return n;
 	
 
-	if (!c_file)	
-		std::cout << "Failed to open file." << std::endl;	
-	else
-	{
-		std::string room,token, sdate, edate;
-		int date, ppl;
-		
-
-		//Loop while there are lines to take in
-
-		while ( std::getline(c_file, room) )
-		{			
-			std::stringstream ss(room);
-			for (int j = 1; j < 5; j++)
-			{
-				std::getline(ss,token, ' ');
-				
-				if (j == 1)
-				{					
-					room_num = token;
-				}
-
-				else if(j == 2)
-				{					
-					ppl = stoi(token,nullptr,10);
-				}
-
-				else if (j == 3)
-				{					
-					sdate = token;
-				}
-
-				else if (j == 4)
-				{					
-					if (token != "Available")
-					{	
-						
-						date = std::stoi(token,nullptr,10);	
-										
-					}
-					else
-						edate = token;		
-				}
-					
-
-			}	
-
-			if ((sdate == "Available" or start > date) and people <= ppl)
-			{				
-				rooms.push_back(room_num);
-			}
-			
-		}
-
-		c_file.close();
-		if (rooms.size() == 0)
-		{
-			std:: cout << "No rooms are available. Please choose another date or number of people." << std::endl;
-			return false;
-		}
-		else
-		{	
-			for (int i = 0; i < rooms.size(); i++)
-			{
-				std::cout << "Room " << i+1 << " is available." << std::endl;
-			}
-
-			std::cout << "Please select a room number." << std::endl;
-			std::cout << "Press Q to cancel and choose different dates/people." << std::endl;
-			std::string room_choice;
-			std::cin >> room_choice;
-			std::cin.clear();
-			if (room_choice == "Q")
-			{
-				return false;
-			}
-			else
-			{
-				payment d;
-				d.make_payment();
-				return true;
-			}
-		}
-	}
-	return false;
 }
 
-#endif checkres
+#endif 
