@@ -13,6 +13,26 @@ public:
 		date = date_;
 		cw2 = cw2_;
 	}
+
+	int get_cc()
+	{
+		return cc;
+	}
+
+	int get_bill()
+	{
+		return bill_number;
+	}
+
+	int get_cw2()
+	{
+		return cw2;
+	}
+
+	int get_date()
+	{
+		return date;
+	}
 	
 private:
 	std::string guest_name;
