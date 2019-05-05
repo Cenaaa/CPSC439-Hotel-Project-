@@ -1,6 +1,7 @@
 #ifndef myres
 #define myres
 #include "check_reservation.h"
+#include "payment.h"
 
 /*
 
@@ -14,19 +15,22 @@ public:
 
 private:
 	int start_, end_, people_;
-	bool picked_room;
+	bool picked_room, made_pay;
 };
 
 make_reservation :: make_reservation(int start, int end, int people)
 {
 	check_reservation res(start, end, people);
-	picked_room = res.check_res(start,end,people);
-
-	if (picked_room == true)
+	room z = res.check_res(start,end,people);
+	if (z.get_id() == 0)
 	{
-		std::cout << "Successfully picked room." << std::endl;
+		std::cout << "bro you didnt get a valid room" << std::endl;
 	}
- 
+	else
+	{
+		payment p(z.get_price());
+		p.make_payment();
+	}	
 }
 
-#endif myres 
+#endif 
