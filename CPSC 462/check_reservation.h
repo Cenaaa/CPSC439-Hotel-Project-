@@ -14,6 +14,7 @@ class check_reservation
 public: 
 	check_reservation(int start, int end, int people);
 	room check_res(int start, int end, int people);
+	void change_reservation(int id, std::string name, int start, int end, int people);
 	//~check_reservation();
 
 private:
@@ -67,6 +68,20 @@ room check_reservation::check_res(int start, int end, int people)
 	return n;
 	
 
+}
+
+void check_reservation::change_reservation(int id, std::string name, int start, int end, int people)
+{
+	for (int i = 0; i < rooms.size(); i++)
+	{
+		if (rooms[i].get_id() == id)
+		{
+			rooms[i].set_res(true);
+			rooms[i].set_start(start);
+			rooms[i].set_end(end);
+			rooms[i].set_name(name);
+		}
+	}
 }
 
 #endif 
