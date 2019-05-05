@@ -41,13 +41,13 @@ payment_info payment::make_payment()
 
 	if (choice == "y" or choice == "Y")
 	{
-		std::cout << "bing bing wahoo" << std::endl;
+		std::cout << "payment successful." << std::endl;
 		payment_info f(name,123456+date,cc,date,cw2);
 		return f;
 	}
 	else 
 	{	
-		std::cout << "damn no payment lol" << std::endl;
+		std::cout << "no payment." << std::endl;
 		payment_info n("",0,0,0,0);
 		return n;
 	}
