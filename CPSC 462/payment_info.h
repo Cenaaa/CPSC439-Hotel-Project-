@@ -34,7 +34,11 @@ public:
 	{
 		return date;
 	}
-	
+
+	int get_room()
+	{
+		return room_num;
+	}	
 private:
 	std::string guest_name;
 	int date,cw2, bill_number, cc, room_num;
