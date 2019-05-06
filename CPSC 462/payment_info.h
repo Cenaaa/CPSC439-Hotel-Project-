@@ -14,6 +14,10 @@ public:
 		cw2 = cw2_;
 		room_num = room_num_;
 	}
+	payment_info()
+	{
+		
+	}
 
 	int get_cc()
 	{
