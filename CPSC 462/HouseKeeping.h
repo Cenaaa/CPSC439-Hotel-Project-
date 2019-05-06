@@ -9,8 +9,6 @@ using namespace std;
 class HouseKeeping {
 private:
 vector<room> notCleanedRoomsVector;
-time_t now = time(0);
-
 public:
     void request_To_Be_Cleaned (room newRoom)
     {
