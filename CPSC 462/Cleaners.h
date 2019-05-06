@@ -1,26 +1,35 @@
 #include <iostream>
-#include <queue>
+#include "room.h"
+#iclude "cleaners.h"
 using namespace std;
 
 
 
-class Cleaners : public Services
-
+class Services : public HouseKeeping
 {
 private:
-
-    queue<Cleaners> AllCleaners;
+    vector<room> notCleanedRoomvector;
+    vector<staff> Allcleaners;
 
 public:
-   void addCleaner(Cleaners staff)
-   {
-       cout << "/n you have been hired as a cleaner" << staff.fname << " " << staff.lname;
-       AllCleaners.push(staff);
-   }
-   void removeCleaner(Cleaners staff)
-   {
-       cout << "/n you have been terminated." << staff.fname << " " << staff.lname;
-       AllCleaners.pop(staff);
-   }
+    void clean()
+    {
+        if (notCleanedRoomvector.size()>1)
+        {
+            staff new_staff = getCleaner();
+            sendCleaner(new_staff);
+        }
 
-};
+
+    }
+
+    staff getCleaner()
+    {
+        staff readycleaner = Allcleaners.pop_back();
+        return readycleaner;
+    }
+    void sendCleaner(staff ready_staff)
+    {
+        cout << "/n/n" << ready_staff.fName << " " << ready_staff.lName << "will be sent to clean your room shortly./n/n";
+    }
+}
