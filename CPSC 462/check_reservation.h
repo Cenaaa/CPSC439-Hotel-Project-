@@ -20,7 +20,7 @@ public:
 
 private:
 	std::vector<room> rooms;
-	std::vector<room> non_reserved_rooms;
+	
 };
 
 check_reservation::check_reservation(int start, int end, int people)
@@ -43,6 +43,7 @@ check_reservation::check_reservation(int start, int end, int people)
 room check_reservation::check_res(int start, int end, int people)
 {
 	room n(0,0,0);
+	std::vector<room> non_reserved_rooms;
 	for (int i = 0; i < 5; i++)
 	{
 		if (people <= rooms[i].get_people())
