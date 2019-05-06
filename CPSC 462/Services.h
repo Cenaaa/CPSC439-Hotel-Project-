@@ -35,7 +35,7 @@ public:
 
     void addCleaner(staff new_staff)
     {
-        cout << "/n you have been hired as a cleaner" << new_staff.fname << " " << new_staff.lname << "/n/n";
+        cout << endl << "You will be assigned to a room shortly!" << new_staff.fname << " " << new_staff.lname << endl;
         Allcleaners.push_back(new_staff);
     }
 
