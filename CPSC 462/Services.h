@@ -8,8 +8,8 @@ struct staff
     string fname;
     string lname;
     staff(string fname, string lname){
-      this.fname = fname;
-      this.lname = lname;
+      this->fname = fname;
+      this->lname = lname;
     }
 };
 
