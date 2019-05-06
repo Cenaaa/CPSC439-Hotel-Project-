@@ -5,6 +5,7 @@
 #include <sys/time.h>
 using namespace std;
 
+
 class HouseKeeping {
 private:
 vector<room> notCleanedRoomsVector;
@@ -18,6 +19,11 @@ public:
     void HasBeenCleaned(room newCleanedRoom)
     {
       notCleanedRoomsVector.pop_back();
+    }
+
+    vector<room> retNeedToBeCleanedVector()
+    {
+      return notCleanedRoomsVector;
     }
 
 };
