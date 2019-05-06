@@ -12,7 +12,7 @@ class make_reservation
 {
 public:
 	make_reservation();
-	void make_res();
+	payment_info make_res();
 	//~make_reservation();
 
 private:
@@ -23,7 +23,7 @@ make_reservation :: make_reservation()
 {
 }
 
-void make_reservation :: make_res()
+payment_info make_reservation :: make_res()
 {
 	bool v_res = false;
 	bool v_pay = false;
@@ -73,6 +73,7 @@ void make_reservation :: make_res()
 		{
 			res.change_reservation(z.get_id(),z.get_name(),sdate,edate,ppl);
 			v_pay = true;
+			return pi;
 		}
 	}	
 
