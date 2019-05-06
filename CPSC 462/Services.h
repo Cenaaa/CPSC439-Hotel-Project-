@@ -18,8 +18,8 @@ struct staff
 class Services
 {
 private:
-    vector<room> notCleanedRoomvector;
     vector<staff> Allcleaners;
+    vector<room> notCleanedRoomvector;
     HouseKeeping obj;
 
 public:
@@ -42,9 +42,9 @@ public:
     void removeCleaner(staff ex_staff)
     {
         bool deleteit;
-        for (int i = 0 ; i < AllCleaners.size(); i++ )
+        for (int i = 0 ; i < Allcleaners.size(); i++ )
         {
-            if (AllCleaners[i].fname == ex_staff.fname &&  AllCleaners[i].lname == ex_staff.lname )
+            if (Allcleaners[i].fname == ex_staff.fname &&  Allcleaners[i].lname == ex_staff.lname )
             {
                 deleteit = false;
                 cout << "/n you have been terminated." << ex_staff.fname << " " << ex_staff.lname;
@@ -53,23 +53,24 @@ public:
             }
             if (deleteit)
             {
-               AllCleaners[i] = AllCleaners[i+1];
+               Allcleaners[i] = Allcleaners[i+1];
             }
 
 
         }
-     AllCleaners.pop_back();
+     Allcleaners.pop_back();
     }
 
 
     staff getCleaner()
     {
-        staff readyCleaner = Allcleaners.pop_back();
+        staff readyCleaner = Allcleaners.back();
+                           Allcleaners.pop_back(); 
         return readyCleaner;
     }
     void sendCleaner(staff ready_staff)
     {
-        cout << "/n/n" << ready_staff.fName << " " << ready_staff.lName << "will be sent to clean your room shortly./n/n";
+        cout << "/n/n" << ready_staff.fname << " " << ready_staff.lname << "will be sent to clean your room shortly./n/n";
     }
 
 
