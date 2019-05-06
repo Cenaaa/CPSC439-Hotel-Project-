@@ -15,6 +15,7 @@ public:
 	check_reservation(int start, int end, int people);
 	room check_res(int start, int end, int people);
 	void change_reservation(int id, std::string name, int start, int end, int people);
+	std::vector<room> send_roomlist();
 	//~check_reservation();
 
 private:
@@ -34,22 +35,31 @@ check_reservation::check_reservation(int start, int end, int people)
 	rooms.push_back(d);
 	room e(5,3,250);
 	rooms.push_back(e);
+
+
 	
 }
 
 room check_reservation::check_res(int start, int end, int people)
 {
+	room n(0,0,0);
 	for (int i = 0; i < 5; i++)
 	{
 		if (people <= rooms[i].get_people())
 			{			
-				if (start >= rooms[i].get_start() or rooms[i].get_start() == 0)
+				if (start >= rooms[i].get_start() || rooms[i].get_start() == 0)
 				{			
 					std:: cout << "Room: " << rooms[i].get_id() << " is available." << std::endl;
 					std:: cout << "Price: $" << rooms[i].get_price() << std::endl;		
 					non_reserved_rooms.push_back(rooms[i]);
 				}
 			}		
+	}
+
+	if (non_reserved_rooms.size() == 0)
+	{
+		std:: cout << "No rooms available with those parameters." << std::endl;
+		return n;
 	}
 
 	int choice;
@@ -64,7 +74,7 @@ room check_reservation::check_res(int start, int end, int people)
 
 	}
 	std:: cout << "Didnt choose valid room." << std::endl;
-	room n(0,0,0);
+	
 	return n;
 	
 
@@ -82,6 +92,11 @@ void check_reservation::change_reservation(int id, std::string name, int start, 
 			rooms[i].set_name(name);
 		}
 	}
+}
+
+std::vector<room> check_reservation::send_roomlist()
+{
+	return rooms;
 }
 
 #endif 
