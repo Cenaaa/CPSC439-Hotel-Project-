@@ -59,10 +59,11 @@ payment_info make_reservation :: make_res()
 		}
 	}
 
+	payment p(z.get_price());
+	payment_info pi;
 	while (v_pay == false)
 	{
-		payment p(z.get_price());
-		payment_info pi;
+		
 		pi = p.make_payment(z.get_id());
 
 		if (pi.get_room() == 0)
