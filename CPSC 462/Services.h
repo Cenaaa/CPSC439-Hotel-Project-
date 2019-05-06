@@ -70,7 +70,7 @@ public:
     }
     void sendCleaner(staff ready_staff)
     {
-        cout << "/n/n" << ready_staff.fname << " " << ready_staff.lname << "will be sent to clean your room shortly./n/n";
+        cout << endl << ready_staff.fname << " " << ready_staff.lname << "will be sent to clean your room shortly." << endl ;
     }
 
 
