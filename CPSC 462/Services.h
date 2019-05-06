@@ -1,39 +1,35 @@
 #include <iostream>
 #include "room.h"
 #include "cleaners.h"
-#include <queue>
 using namespace std;
-
 
 
 
 class Services : public HouseKeeping
 {
 private:
-    queue<room> notCleanedRoomsQueue;
-    queue<room> cleanedRoomsQueue;
-    queue<Cleaners> readycleaner;
-    queue<Cleaners> Allcleaners;
+    vector<room> notCleanedRoomvector;
+    vector<staff> Allcleaners;
 
 public:
     void clean()
     {
-        if (notCleanedRoomsQueue.size()>1)
+        if (notCleanedRoomvector.size()>1)
         {
-            Cleaners staff = getCleaner();
-            sendCleaner(staff);
+            staff new_staff = getCleaner();
+            sendCleaner(new_staff);
         }
 
 
     }
 
-    Clenears getCleaner()
+    staff getCleaner()
     {
-        readycleaner = Allcleaners.pop();
-        return readycleaner.pop();
+        staff readycleaner = Allcleaners.pop_back();
+        return readycleaner;
     }
-    Clenears sendCleaner(Clenears staff)
+    void sendCleaner(staff ready_staff)
     {
-        cout << "/n/n" << staff.firstName << " " << staff.lastName << "will be sent to clean your room shortly./n/n";
+        cout << "/n/n" << ready_staff.fName << " " << ready_staff.lName << "will be sent to clean your room shortly./n/n";
     }
 }
