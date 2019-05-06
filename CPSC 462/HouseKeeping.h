@@ -1,36 +1,23 @@
 #include <iostream>
 #include <ctime>
-#include <queue>
+#include <vector>
 #include "room.h"
 #include <sys/time.h>
 using namespace std;
 
 class HouseKeeping {
 private:
-queue<room> notCleanedRoomsQueue;
-queue<room> cleanedRoomsQueue;
+vector<room> notCleanedRoomsVector;
 time_t now = time(0);
 
 public:
     void request_To_Be_Cleaned (room newRoom)
     {
-      notCleanedRoomsQueue.push(newRoom);
+      notCleanedRoomsVector.push_back(newRoom);
     }
     void HasBeenCleaned(room newCleanedRoom)
     {
-      cleanedRoomsQueue.push(newCleanedRoom);
-      notCleanedRoomsQueue.pop(newCleanedRoom);
+      notCleanedRoomsVector.pop_back();
     }
-    void UpdateRoomStat ()
-    {
-        for(int i = 0 ; i < cleanedRoomsQueue.size(); i ++  )
-        {
-          if (cleanedRoomsQueue.room.DateClean - now > 48 * 60 * 60)
-          {
 
-                       cleanedRoomsQueue.pop(room);
-                       notCleanedRoomsQueue.push(room);
-          }
-        }
-    }
 };
