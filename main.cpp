@@ -31,7 +31,6 @@ int  main()
     // myHouseKeepingController.addStaff("hg","re");
     // myHouseKeepingController.addStaff("hc","ne");
 
-
     int index = 0 ;
     int  roomNum  = getroomNum(index);
     myHouseKeepingController.cleanARoom(allRooms[index],roomNum);
