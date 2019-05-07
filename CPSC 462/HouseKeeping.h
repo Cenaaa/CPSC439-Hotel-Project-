@@ -5,8 +5,8 @@
 #include <sys/time.h>
 using namespace std;
 
-
-class HouseKeeping {
+class HouseKeeping
+{
 private:
 vector<room> notCleanedRoomsVector;
 public:
@@ -14,14 +14,14 @@ public:
     {
       notCleanedRoomsVector.push_back(newRoom);
     }
-    void HasBeenCleaned(room newCleanedRoom)
+    void HasBeenCleaned()
     {
       notCleanedRoomsVector.pop_back();
     }
-
     vector<room> retNeedToBeCleanedVector()
     {
       return notCleanedRoomsVector;
     }
+
 
 };
