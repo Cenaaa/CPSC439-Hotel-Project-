@@ -1,82 +1,79 @@
 #include <iostream>
 #include "room.h"
-using namespace std;
 
+using namespace std;
 
 struct staff
 {
-    string fname;
-    string lname;
-    staff(string fname, string lname){
-      this->fname = fname;
-      this->lname = lname;
-    }
+  string fname;
+  string lname;
+  staff(string fname = "", string lname= "") {
+    this->fname = fname;
+    this->lname = lname;
+  }
 };
 
+class Services {
+  private:
+  vector < staff >  Allcleaners;
+  vector < room >   notCleanedRoomvector;
+  HouseKeeping      myHouseKeeping;
 
+  public:
+    bool clean(int index) {
+      notCleanedRoomvector = myHouseKeeping.retNeedToBeCleanedVector();
+        staff new_staff = getCleaner();
+        if (new_staff.fname != ""){
+        sendCleaner(new_staff,index);
+        return 1;
+    }else{
+        return 0;
+    }
+    }
 
-class Services
+  void addCleaner(staff new_staff) {
+    cout << endl << new_staff.fname << " " << new_staff.lname << "  you have been added to our team." << endl;
+    Allcleaners.push_back(new_staff);
+  }
+
+  void removeCleaner(staff ex_staff) {
+    bool found = false;
+    bool deleteit =  false;
+    for (int i = 0; i < Allcleaners.size(); i++) {
+      if (Allcleaners[i].fname == ex_staff.fname && Allcleaners[i].lname == ex_staff.lname) {
+        cout << endl << "You have been terminated: " << ex_staff.fname << " " << ex_staff.lname << endl << " .";
+        deleteit = true;
+
+      }
+      if (deleteit) {
+        Allcleaners.erase(Allcleaners.begin() + i);
+        deleteit = false;
+        found = true;
+        }
+    }
+if (!found)
 {
-private:
-    vector<staff> Allcleaners;
-    vector<room> notCleanedRoomvector;
-    HouseKeeping obj;
+cout << endl  << ex_staff.fname << " " << ex_staff.lname << " is not one of our staff." << endl ;
+}
 
-public:
-    void clean()
-    {
-        notCleanedRoomvector = obj.retNeedToBeCleanedVector();
-        if (notCleanedRoomvector.size() > 1)
-        {
-            staff new_staff = getCleaner();
-            sendCleaner(new_staff);
-        }
+  }
+
+  staff getCleaner() {
+    srand(time(0));
+    if (Allcleaners.size() != 0 ){
+    int index = rand() % Allcleaners.size();
+    return Allcleaners[index];
     }
-
-    void addCleaner(staff new_staff)
-    {
-        cout << endl << "You will be assigned to a room shortly!" << new_staff.fname << " " << new_staff.lname << endl;
-        Allcleaners.push_back(new_staff);
+    else{
+        staff nostaff("","");
+     return nostaff;
     }
+  }
+  void sendCleaner(staff ready_staff, int index) {
 
-    void removeCleaner(staff ex_staff)
-    {
-        bool deleteit;
-        for (int i = 0 ; i < Allcleaners.size(); i++ )
-        {
-            if (Allcleaners[i].fname == ex_staff.fname &&  Allcleaners[i].lname == ex_staff.lname )
-            {
-                deleteit = false;
-                cout << "/n you have been terminated." << ex_staff.fname << " " << ex_staff.lname;
-                 deleteit = true;
-
-            }
-            if (deleteit)
-            {
-               Allcleaners[i] = Allcleaners[i+1];
-            }
+    cout << endl << ready_staff.fname << " " << ready_staff.lname << ", you will be sent to clean the room number " << "( "<< index <<" )" << " shortly (be ready)" << endl;
 
 
-        }
-     Allcleaners.pop_back();
-    }
-
-
-    staff getCleaner()
-    {
-        staff readyCleaner = Allcleaners.back();
-                           Allcleaners.pop_back(); 
-        return readyCleaner;
-    }
-    void sendCleaner(staff ready_staff)
-    {
-        cout << endl << ready_staff.fname << " " << ready_staff.lname << "will be sent to clean your room shortly." << endl ;
-    }
-
-
-
-
-
-
+  }
 
 };
