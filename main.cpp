@@ -2,7 +2,9 @@
 #include "HouseKeepingController.h"
 #include "check_reservation.h"
 
-
+int getroomNum(int index){
+    return index +1;
+}
 
 
 int  main()
@@ -32,35 +34,57 @@ int  main()
 
 
     int index = 0 ;
-    int  roomNum  = index +1;
+    int  roomNum  = getroomNum(index);
     myHouseKeepingController.cleanARoom(allRooms[index],roomNum);
 
     myHouseKeepingController.removeStaff("ht", "ze");
 
+    myHouseKeepingController.removeStaff("so", "so");
+
+
+
+
+
+    myHouseKeepingController.addStaff("hy","ee");
+    myHouseKeepingController.addStaff("htw", "zew");
+    myHouseKeepingController.addStaff("hi","xe");
+    myHouseKeepingController.addStaff("na","ot");
+    myHouseKeepingController.addStaff("si","he");
+
+
+
+    index = 2;
+    roomNum  = getroomNum(index);
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+
+    index = 4;
+    roomNum  = getroomNum(index);
+
     myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
 
 
-    // staff staff1("john"," jojo");
-    // staff staff2("rob"," ali");
-    // staff staff3("rofsdasfafb"," fsd");
-    // staff staff4("gogo"," wer");
-    // staff staff5("josh"," balli");
-    // staff myCleaner("","");
-    //
-    // myService.request_To_Be_Cleaned(allRooms[0]);
-    // myService.request_To_Be_Cleaned(allRooms[1]);
-    // vector<room> notCleaned = myService.retNeedToBeCleanedVector();
-    // obj.addCleaner(staff1);
-    // obj.addCleaner(staff2);
-    // obj.addCleaner(staff3);
-    // obj.addCleaner(staff4);
-    // obj.addCleaner(staff5);
-    // myCleaner = obj.getCleaner();
-    // obj.sendCleaner(myCleaner);
-    // myService.HasBeenCleaned();
-    // myService.HasBeenCleaned();
-    //
-    // obj.removeCleaner(staff5);
+    index = 2;
+    roomNum  = getroomNum(index);
+
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+
+    myHouseKeepingController.cleanARoom(allRooms[index], roomNum);
+
+
+
+
+
 
 return 0 ;
 }
