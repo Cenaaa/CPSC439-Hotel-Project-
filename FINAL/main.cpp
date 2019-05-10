@@ -21,9 +21,8 @@
 #include "payment_info.h"
 #include "make_reservation.h"
 #include "check_reservation.h"
-#include "Services.h"
-#include "HouseKeeping.h"
 #include "KitchenController.h"
+#include "HouseKeepingController.h"
 
 using std::string;
 using std::cout;
@@ -40,6 +39,103 @@ void home_Menu();
    8
    1234
 */
+
+int getroomNum(int index) {
+	return index + 1;
+}
+
+
+string MENU = "\n1.Add staff\n"
+"\n2.Remove staff\n"
+"\n3.clean a room\n\nEnter a number: ";
+
+void  do_stuff_housekeeping()
+{
+
+
+	vector<room> allRooms;
+	check_reservation myreserv(1, 1, 1);
+	allRooms = myreserv.send_roomlist();
+	HouseKeepingController myHouseKeepingController;
+	int roomNum = 0;
+	int count = 0;
+
+
+	int choice = 0;
+	cout << MENU;
+	cin >> choice;
+	cin.ignore(1000, '\n');
+	while (true)
+	{
+
+		//roomNum = 0 ;
+		if (choice > 0 && choice < 4) {
+
+
+			//cin.ignore(1000,' ');
+			string fname;
+
+			string lname;
+			bool valid = false;
+			string f_name;
+			switch (choice)
+			{
+			case 1:
+
+				cout << "\nEnter the first name: ";
+				getline(cin, fname);
+				f_name = fname;
+				cout << "\nEnter the last name: ";
+				getline(cin, lname);
+				myHouseKeepingController.addStaff(fname, lname);
+				break;
+			case 2:
+				cout << "\nEnter the first name (removing): ";
+				getline(cin, fname);
+				cout << "\nEnter the last name(removing): ";
+				getline(cin, lname);
+				myHouseKeepingController.removeStaff(fname, lname);
+				break;
+			case 3:
+				roomNum = -1;
+				cout << "\nWhich room do you want to be cleaned? ";
+				cin >> roomNum;
+				if (allRooms.size() > roomNum - 1 && roomNum - 1 >= 0 && allRooms.size() != 0)
+				{
+					valid = true;
+				}
+				else
+				{
+					valid = false;
+				}
+				if (valid)
+				{
+					myHouseKeepingController.cleanARoom(allRooms[roomNum - 1], roomNum);
+				}
+				else
+				{
+					cout << endl << "The room you entered in not valid" << endl;
+				}
+				break;
+			default:
+				break;
+
+			}
+
+			count++;
+		}
+		else {
+			cout << "\nyour choice is not valid.\n";
+		}
+
+
+		cout << MENU;
+		cin >> choice;
+		cin.ignore(1000, '\n');
+
+	}
+}
+
 
 int main(int argc, const char * argv[]) {
    int choice, usrID_Ref;
@@ -92,25 +188,8 @@ int main(int argc, const char * argv[]) {
             } else { cout << "Please login first!\n\n"; }
             break;
          case 4: // Housekeeping
-            if (auth.get_Status()) {
-               vector<room> allRooms;
-               check_reservation myreserv(1, 1, 1);
-               allRooms = myreserv.send_roomlist();
-               staff staff1("john", " jojo");
-               staff staff2("rob", " ali");
-               staff myCleaner("", "");
-               HouseKeeping myService;
-               Services     obj;
-               payment_info new_payment_info = registered.get_Payment_Info();
-               int rm = new_payment_info.get_room();
-               myService.request_To_Be_Cleaned(allRooms[rm - 1]);
-               vector<room> notCleaned = myService.retNeedToBeCleanedVector();
-               obj.addCleaner(staff1);
-               obj.addCleaner(staff2);
-               myCleaner = obj.getCleaner();
-               obj.addCleaner(myCleaner);
-               obj.sendCleaner(staff2);
-               //obj.removeCleaner(staff2);
+			 if (auth.get_Status()) {
+				 do_stuff_housekeeping();
             } else { cout << "Please login first!\n\n"; }
             break;
          case 5:  // Food Order
